@@ -1,6 +1,7 @@
 import requests as req
 import json
 
+# main orchestrator of the function
 def main():
     url = "https://ipapi.co/json"
     response = callApiEndpoint(url)
@@ -17,19 +18,25 @@ def main():
     else:
        print("Response Code is {} for http request to {}".format(response.status_code, url))
 
+
+# http get method on the url passed as parameter
 def callApiEndpoint(url):
     response = req.get(url)
     return response
 
+
+# converts json string into python dictionary object
 def parseJson(text):
     parsed = dict
     try:
        parsed = json.loads(text)
     except:
-       raise("Error while parsing text to json")
+       raise("Error while parsing text to python dict object")
     finally:
         return parsed
-    
+
+
+# gets value for the key from dict
 def extract(key, dictionary):
    value = ""
    try:
